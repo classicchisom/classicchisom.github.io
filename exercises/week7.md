@@ -1,4 +1,4 @@
-# Week 7
+ # Week 7
 
 ## Exercise 0
 
@@ -12,14 +12,14 @@ First thing we'll want to do is draw the canvas grid so that it looks like this:
 
 ![picture of canvas grid](/exercises/canvas_grid.png)
 
-We're going to put our draw logic in `Canvas`'s `draw(cells)` method. 
+We're going to put our draw logic in `Canvas`'s `draw(cells)` method.
 
-*  Set `this.ctx`'s `lineWidth` property to 1 in `draw(cells)` (This will set the width of your lines to 1 pixel) 
+*  Set `this.ctx`'s `lineWidth` property to 1 in `draw(cells)` (This will set the width of your lines to 1 pixel)
 *  Set the `strokeStyle` property to '#999' (This will give the stroke color to a light gray)
 
 *  Set up a "for"-loop for drawing vertical lines within `this.ctx`
    *  Initialize the looping variable to `this.cellSize`
-   *  Loop until `this.pixelHeight` 
+   *  Loop until `this.pixelHeight`
    *  Increment the loop with a step size of `this.cellSize`
    *  For every loop iteration we will draw a vertical line in `this.ctx` beginning at `(index + 0.5, 0)` and ending at
 `(index + 0.5, this.pixelHeight)`
@@ -50,8 +50,8 @@ function with a clickEvent object that has a `cellX` property and a `cellY`
 property with the x and y cell index of the click event (ex. `event.cellX`).
 *  To add a click handler we'll need to call `addEventListener` on `this.obj`
    *  [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
-*  We'll want to listen for the `'click'` event. 
-   *  Click events have 2 important fields `clientX` and `clientY` (these are the X and Y coordinates of the click) 
+*  We'll want to listen for the `'click'` event.
+   *  Click events have 2 important fields `clientX` and `clientY` (these are the X and Y coordinates of the click)
    *  The X and Y coordinates are relative to your browser window and *not* the game of life canvas. In order to determine which cell was clicked we'll have to transform those coordinates to X and Y indexes.
 
 There are a couple of other important methods.
@@ -72,7 +72,7 @@ draw it out.
 
 Inside the `click`'s [callback function](#exercise-2-click-handler) (from Exercise 2):
 *  Call toggle with an array where the first value is `event.cellX` and the second value is `event.cellY`.
-  *  `toggle` should push `cell` onto `this.current` by calling `this.current.push(cell)` 
+  *  `toggle` should push `cell` onto `this.current` by calling `this.current.push(cell)`
      *  [push documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
   *  `toggle` should then call it's `redraw()` method.
 
@@ -89,7 +89,7 @@ At the bottom of `Canvas.draw`:
 
 To add yellow squares to the board you push cells on to `this.current` how would
 you remove yellow squares from the grid? Use the answer to this question to implement
-`toggle` so that it toggles grid values. 
+`toggle` so that it toggles grid values.
 
 Hint: If you're stuck on trying to figure out how to alter `this.current` remember
 that `this.current` is an Array and try using [google.com](http://google.com) to
