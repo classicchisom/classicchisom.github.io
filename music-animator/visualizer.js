@@ -21,12 +21,14 @@ class AbstractVisualizer {
     context.lineWidth = rectangleProperties.width || 5;
     context.strokeStyle = rectangleProperties.color || '#FF00000';
 
+    context.beginPath();
     context.moveTo(point1.x, point1.y);
     context.lineTo(point2.x, point2.y);
     context.lineTo(point3.x, point3.y);
     context.lineTo(point4.x, point4.y);
     context.lineTo(point1.x, point1.y);
     context.closePath();
+    context.stroke();
     context.fill();
   }
 
@@ -50,10 +52,11 @@ class AbstractVisualizer {
 
   }
 
-  drawCircle() {
-    // TODO(week 3): Implement.
-    // See here for more information:
-    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+  drawCircle(startingPoint, radius) {
+    const context = canvas.getContext("2d");
+    context.beginPath();
+    context.arc(startingPoint.x, startingPoint.y, 50, 0, 2 * Math.PI);
+    context.stroke();
   }
 
   drawBackground(canvas, canvasDimensions, color = BACKGROUND_COLOR) {
@@ -83,13 +86,13 @@ function generateRandomValue(minValue = 1, maxValue = 10) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function generateRandomPoint() {
+function generateRandomPoint(minValue,maxValue) {
   // TODO:
   // Use generateRandomValue to create a ranom x and a random y value.
   // HINT: we can use the constants CANVAS_HEIGHT and CANVAS_WIDTH for the max
   //     x and y values.
   return {
-    x: 0,
-    y: 0,
+    x: generateRandomValue(1, CANVAS_WIDTH),
+    y: generateRandomValue(1,CANVAS_HEIGHT),
   };
 }

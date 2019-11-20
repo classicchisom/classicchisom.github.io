@@ -5,7 +5,7 @@ class MyVisualizer extends AbstractVisualizer {
     }
 
     startVisual() {
-      this.updateVisual(/* peakIndex */ 0);
+      this.updateVisual();
     }
 
     /**
@@ -19,6 +19,8 @@ class MyVisualizer extends AbstractVisualizer {
     updateVisual(peakIndex) {
       const audioEl = document.querySelector('#audio');
 
+      //audioEl.currentTime
+      //this.peaks[]
       // If we pass an index greater than the # peaks,
       if (peakIndex >= this.peaks.length) {
           return;
@@ -30,8 +32,9 @@ class MyVisualizer extends AbstractVisualizer {
       // 3) Compare the time properties to peak properties (part 1 and 2 above):
       //    -- If the audio's current time is greater or equal to the time of
       //    the peak, draw visualizations (drawShapes).
-      if (true
-      ) {
+      if (audioEl.currentTime >= this.peaks[peakIndex]["timeOfPeak"] {
+
+      this.drawShapes();
 
         // Update the frame.
         requestAnimationFrame(() => {
@@ -49,7 +52,9 @@ class MyVisualizer extends AbstractVisualizer {
      * TODO(you): Draw the shapes you'd expect to see in your visual.
      */
     drawShapes() {
+      this.drawCircle(generateRandomPoint(), generateRandomValue())
         // Look at AbstractVisualizer class for functions.
+
     }
 }
 
@@ -71,26 +76,28 @@ document.getElementById('playButton').addEventListener('click', (clickEvent) => 
 
   const audioEl = document.querySelector('#audio');
   const queryInput = document.querySelector('#query')
-  debugger
-  ElementById('playCircle').setAttribute("class", "playing");
+  document .getElementById('playCircle').setAttribute("class", "playing");
 
   if(!audioEl.src) {
     // TODO(you): Use the spotifyApi to searchTracks for your input. Documentation can be found at:
     // https://doxdox.org/jmperez/spotify-web-api-js#src-spotify-web-api.js-constr.prototype.searchtracks
-    spotifyApi.searchTracks('classic' {limit: 1})
+    spotifyApi.searchTracks(queryInput.value, {limit: 1})
       .then((results) => {
 
-        let previewUrl =
+        let previewUrl = results.tracks.items[0].preview_url
 
         if (previewUrl) {
           // Sets the HTML audio element source to the music.
           audioEl.src = previewUrl;
 
           requestAudio(previewUrl, (audio) => {
-            // TODO(you): Use analyzeAudio to apply frequency analysis.
-
+            // TODO(you): Use analyzeAudio(name of variable) to apply frequency analysis.
+            let analyzedAduio = analyzeAudio(audio);
             // TODO(you): Create an instance of MyVisualizer using the
             // analyzed audio.
+            let visualizer = new MyVisualizer(analyzedAduio);
+
+
 
             audioEl.play();
 
@@ -115,3 +122,5 @@ document.getElementById('playButton').addEventListener('click', (clickEvent) => 
 		document.getElementById('playCircle').setAttribute("class", "playing");
   }
 });
+let visualizer = new MyVisualizer();
+visualizer.drawRectangle({x: 100, y:100}, {x:200, y:100}, {x:200, y:200}, {x:100, y:200});
