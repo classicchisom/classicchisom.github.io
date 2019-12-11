@@ -3,8 +3,94 @@ class GameOfLife {
   }
 
   next(shape) {
-  }
+    let neighbours = {};
+     console.log(shape);
+    for (let i = 0; i < shape.length; i = i + 1){
+      let cell = shape[i];
+      let x = cell[0];
+      let y = ccell[1];
+// Top-left
+      let key = 'c' + (x - 1) + ',' + (y - 1);
+      if(neighbours[key]) {
+        neighbours[key].n = neighbours[key].n + 1;
+      } else {
+        neighbours[key] = {
+          n: 1,
+          cell: [x - 1, y - 1],
+        };
+      }
+// Top
+      key = 'c' + (x) + ',' + (y - 1);
+      if(neighbours[key]) {
+        neighbours[key] = {
+          n: 1,
+          cell: [x, y - 1],
+        };
+      }
+// final
+key = 'c' + (x + 1) + ',' + (y - 1);
+if(neighbours[key]) {
+  neighbours[key] = {
+    n: 1,
+    cell: [x + 1, y - 1],
+  };
 }
+key = 'c' + (x + 1) + ',' + (y + 1);
+if(neighbours[key]) {
+  neighbours[key] = {
+    n: 1,
+    cell: [x + 1, y + 1],
+  };
+}
+// bottom
+key = 'c' + (x) + ',' + (y + 1);
+if(neighbours[key]) {
+  neighbours[key] = {
+    n: 1,
+    cell: [x, y + 1],
+  };
+}
+//bottom left
+key = 'c' + (x - 1) + ',' + (y + 1);
+if(neighbours[key]) {
+  neighbours[key] = {
+    n: 1,
+    cell: [x, y - 1],
+  };
+}
+key = 'c' + (x - 1) + ',' + (y);
+if(neighbours[key]) {
+  neighbours[key] = {
+    n: 1,
+    cell: [x - 1, y],
+  };
+}
+}
+ for (let i = 0; i < shape.length; i = i + 1) {
+   let cell = shape [i];
+   let x = cell [0];
+   let y = cell [1];
+
+   let key = 'c' + x + ',' + y;
+   if(neighbours[key]) {
+     neighbours[key]. populated = true;
+   }
+ }
+
+ let nextShape = [];
+ for(let key in neighbours) {
+   let currentNeighbour = neighbours[key];
+   let numOfNeighbours = currentNeighbour.n;
+   let populated = currentNeighbour.populated;
+ }
+ // For rulews each cell with twwo 0r three neighbours survives becomes populated.
+    if(numOfNeighbours == 2 || 3) numOfNeighbours {
+      nextShape.push(cell);
+    } else if( !populated && numOfNeighbours === 3)
+        nextShape.push(cell);
+    }
+  }
+    return nextShape;
 
 class Canvas {
   constructor(container) {
@@ -121,6 +207,10 @@ class Controls {
       this.shape.toggle([event.cellX, event.cellY]);
       console.log(event);
     });
+    let el = document.getElementById('next');
+    el.addEventListener('click', () => {
+      this.next();
+    });
   }
 
   setGeneation(gen) {
@@ -130,6 +220,10 @@ class Controls {
   }
 
   next() {
+    let anything = this.shape.get();
+    let updateAnything = this.gameOfLife.next(anything);
+    this.shape.set(updateAnything);
+    this.shape.redraw();
   }
 }
 
